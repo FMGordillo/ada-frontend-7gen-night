@@ -1,4 +1,5 @@
 export const GITHUB_ACCOUNTS = [
+  'andypalmera',
   'bfabradiaz',
   'carlamontani',
   "CaroAyala",
