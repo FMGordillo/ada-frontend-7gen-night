@@ -1,7 +1,8 @@
 export const GITHUB_ACCOUNTS = [
-  'andypalmera',
-  'bfabradiaz',
-  'carlamontani',
+  "andypalmera",
+  "BellaFool",
+  "bfabradiaz",
+  "carlamontani",
   "CaroAyala",
   "DoloF",
   "Emifernandezr",
@@ -16,6 +17,7 @@ export const GITHUB_ACCOUNTS = [
   "MarielCastillo",
   "melinaariana",
   "orozcoana",
+  "rafitacorrea",
   "stephihojman",
   "TamaraVeliz"
 ]
