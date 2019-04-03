@@ -1,5 +1,7 @@
 import auth0 from "auth0-js"
 
+const isProd = process.env.NODE_ENV === "production"
+
 export default class Auth {
   LOGIN_KEY = "ada-7gen-fe-login"
   accessToken = null
@@ -8,9 +10,9 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: "fmgordillo-auth-api.auth0.com",
     clientID: "ei0doT620yf0BiuW1zcDXSOsELzu2Qoy",
-    redirectUri: `${window.location.protocol}//${
-      window.location.hostname
-    }:${process.env.PORT || 3000}/callback`,
+    redirectUri: `${window.location.protocol}//${window.location.hostname}:${
+      isProd ? process.env.PORT || 3000 : process.env.PORT
+    }/callback`,
     responseType: "token id_token",
     scope: "openid"
   })
