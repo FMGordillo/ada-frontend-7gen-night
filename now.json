@@ -1,3 +1,9 @@
 {
-  "name": "ada-7gen-fe-dashboard"
+  "name": "ada-7gen-fe-dashboard",
+  "env": {
+    "REACT_APP_GITHUB_TOKEN": "@GITHUB_TOKEN",
+    "REACT_APP_CLOUDANT_HOST": "@CLOUDANT_HOST",
+    "REACT_APP_CLOUDANT_USERNAME": "@CLOUDANT_USERNAME",
+    "REACT_APP_CLOUDANT_PASSWORD": "@CLOUDANT_PASSWORD"
+  }
 }
