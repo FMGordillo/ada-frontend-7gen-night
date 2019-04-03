@@ -1,6 +1,7 @@
 {
+  "version": 2,
   "name": "ada-7gen-fe-dashboard",
-  "build": [
+  "builds": [
     {
       "src": "package.json",
       "use": "@now/static-build",
