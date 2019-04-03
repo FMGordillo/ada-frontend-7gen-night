@@ -1,18 +1,35 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { Router, Route } from "react-router-dom"
+import { createBrowserHistory } from "history"
 
-import { Home, Accounts, Account, Attendance } from "./pages"
+import Auth from "./utils/auth"
+import { Home, Accounts, Account, Attendance, Callback } from "./pages"
 import { Layout } from "./components"
 import * as serviceWorker from "./serviceWorker"
 
+const auth = new Auth()
+
+const handleAuthentication = (nextState, replace) => {
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
+    auth.handleAuthentication()
+  }
+}
+
 ReactDOM.render(
-  <Router>
-    <Layout>
+  <Router history={createBrowserHistory()}>
+    <Layout auth={auth}>
       <Route path="/" exact component={Home} />
       <Route path="/accounts" exact component={Accounts} />
       <Route path="/accounts/:id" exact component={Account} />
       <Route path="/attendance" exact component={Attendance} />
+      <Route
+        path="/callback"
+        render={props => {
+          handleAuthentication(props)
+          return <Callback {...props} />
+        }}
+      />
     </Layout>
   </Router>,
   document.getElementById("root")
