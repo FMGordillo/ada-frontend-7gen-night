@@ -29,9 +29,6 @@
       "dest": "/index.html"
     }
   ],
-  "scripts": {
-    "now-build": "react-scripts build"
-  },
   "env": {
     "REACT_APP_GITHUB_TOKEN": "@github_token",
     "REACT_APP_CLOUDANT_HOST": "@cloudant_host",
