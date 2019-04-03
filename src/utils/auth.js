@@ -11,7 +11,7 @@ export default class Auth {
     domain: "fmgordillo-auth-api.auth0.com",
     clientID: "ei0doT620yf0BiuW1zcDXSOsELzu2Qoy",
     redirectUri: `${window.location.protocol}//${window.location.hostname}:${
-      isProd ? process.env.PORT : process.env.PORT || 3000
+      isProd ? process.env.PORT || "" : process.env.PORT || 3000
     }/callback`,
     responseType: "token id_token",
     scope: "openid"
