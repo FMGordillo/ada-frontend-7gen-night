@@ -27,9 +27,7 @@ class Attendance extends Component {
         }
       } = await getAssistance({
         selector: {
-          _id: {
-            $gt: 0
-          }
+          date: format(new Date(), "MM/DD/YYYY")
         }
       })
       console.log(data)
