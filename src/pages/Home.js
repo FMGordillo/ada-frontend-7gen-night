@@ -1,20 +1,16 @@
 import React, { Component } from "react"
-import { Title } from "bloomer"
-import { getRepositories } from "../utils/api"
+// import { getRepositories } from "../utils/api"
 
 class Home extends Component {
-  async componentDidMount() {
-    getRepositories("FMGordillo")
-  }
   render() {
     return (
-      <div>
-        <Title>Bienvenida</Title>
+      <>
+        <h1>Bienvenida</h1>
         <p>
           ¡Hola! Acá tenés la lista de alumnas de{" "}
           <b>Frontend Turno Noche (Mar, Jue, Sab)</b>
         </p>
-      </div>
+      </>
     )
   }
 }

@@ -1,27 +1,23 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import { GITHUB_ACCOUNTS } from "../utils/constants"
-import { getRepositories } from "../utils/api"
+import { getRepositories } from "../../utils/api"
+import { GITHUB_ACCOUNTS } from "../../utils/constants"
 
 class Accounts extends Component {
   state = {
+    accounts: [],
     loading: true,
-    error: false,
-    accounts: []
+    error: false
   }
-
-  /**
-   * Get profiles
-   */
   async componentDidMount() {
-    console.log("executing")
     try {
       const accounts = await Promise.all(
         GITHUB_ACCOUNTS.map(id =>
-          getRepositories(id).then(response => {
-            if (response.status === 200) return { id, repos: response.data }
-            else throw response
-          })
+          getRepositories(id)
+            .then(({ data: { user } }) => ({ ...user }))
+            .catch(err => {
+              throw err
+            })
         )
       )
       this.setState({ loading: false, error: false, accounts })
@@ -31,28 +27,27 @@ class Accounts extends Component {
     }
   }
   render() {
-    const { loading, error, accounts } = this.state
+    const { accounts, loading } = this.state
     return (
       <div>
         <p>Current students: {GITHUB_ACCOUNTS.length}</p>
         <p>Last update: {new Date().toString()}</p>
-        {error && <span>Error: {error}</span>}
-        <ul>
-          {(loading && <span>Loading...</span>) ||
-            accounts.map((account, k) => (
+        {(loading && <p>Please wait...</p>) || (
+          <ul>
+            {accounts.map((account, k) => (
               <li key={k}>
                 <Link
                   to={{
-                    pathname: `/accounts/${account.id}`,
-                    state: account
+                    pathname: `/accounts/${account.login}`,
+                    state: { repos: account.repositories.nodes }
                   }}
                 >
-                  {account.id} (
-                  {accounts.find(i => i.id === account.id).repos.length})
+                  {account.login} ({account.repositories.totalCount})
                 </Link>
               </li>
             ))}
-        </ul>
+          </ul>
+        )}
       </div>
     )
   }
