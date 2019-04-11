@@ -2,17 +2,19 @@
   "version": 2,
   "name": "ada-7gen-fe-dashboard",
   "alias": "ada-dashboard.facundogordillo.com",
-  "build": {
-    "src": "package.json",
-    "use": "@now/static-build",
-    "config": { "distDir": "build" },
-    "env": {
-      "GITHUB_TOKEN": "@github_token",
-      "CLOUDANT_HOST": "@cloudant_host",
-      "CLOUDANT_USERNAME": "@cloudant_username",
-      "CLOUDANT_PASSWORD": "@cloudant_password"
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" },
+      "env": {
+        "GITHUB_TOKEN": "@github_token",
+        "CLOUDANT_HOST": "@cloudant_host",
+        "CLOUDANT_USERNAME": "@cloudant_username",
+        "CLOUDANT_PASSWORD": "@cloudant_password"
+      }
     }
-  },
+  ],
   "routes": [
     {
       "src": "/static/(.*)",
