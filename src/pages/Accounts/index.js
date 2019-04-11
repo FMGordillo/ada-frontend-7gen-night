@@ -42,7 +42,8 @@ class Accounts extends Component {
                     state: { repos: account.repositories.nodes }
                   }}
                 >
-                  {account.login} ({account.repositories.totalCount})
+                  {account.name || "N/A"} ({account.login}) (
+                  {account.repositories.totalCount})
                 </Link>
               </li>
             ))}

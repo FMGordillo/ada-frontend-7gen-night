@@ -25,11 +25,7 @@ class Attendance extends Component {
         data: {
           response: { docs: data }
         }
-      } = await getAssistance({
-        selector: {
-          date: format(new Date(), "MM/DD/YYYY")
-        }
-      })
+      } = await getAssistance()
       console.log(data)
 
       const currentDate = new Date()
@@ -56,17 +52,22 @@ class Attendance extends Component {
   /**
    * Enviar datos
    */
-  handleSubmit = async (e, user) => {
+  handleSubmit = async (e, user, list_id) => {
+    e.preventDefault()
+    const [_id, _rev, isPresent, isAbsent, comments] = Object.values(e.target)
     const currentDate = format(new Date(), "MM/DD/YYYY")
-    const _id = `${user}-${format(new Date(), "MM/DD/YYYY")}`
-    const isPresente = e.target.value === "true"
+    const isPresente = isPresent.checked
 
-    const doc = {
-      _id,
+    let doc = {
+      _id: _id.value,
       user,
       date: currentDate,
       isPresente,
-      comentarios: ""
+      comentarios: comments.value
+    }
+
+    if (_rev.value) {
+      doc = Object.assign(doc, { _rev })
     }
 
     try {
@@ -93,16 +94,16 @@ class Attendance extends Component {
             <p>No se puede editar, perdon</p>
           ))}
         {/* TODO: Terminar con "Comentarios" */}
-        <table>
-          <thead>
-            <tr>
-              <td>Username</td>
-              <td>Presente</td>
-              <td>Ausente</td>
-              <td>Comentarios</td>
-            </tr>
-          </thead>
-          <tbody>
+        <div className="table">
+          <div className="thead">
+            <div className="tr">
+              <div className="th">Username</div>
+              <div className="th">Presente</div>
+              <div className="th">Ausente</div>
+              <div className="th">Comentarios</div>
+            </div>
+          </div>
+          <div className="tbody">
             {GITHUB_ACCOUNTS.map((account, k) => {
               const user =
                 accounts.length > 0
@@ -113,9 +114,13 @@ class Attendance extends Component {
                     )
                   : {}
               return (
-                <tr key={k}>
-                  <td>{account}</td>
-                  <td>
+                <form
+                  className="tr"
+                  onSubmit={e => this.handleSubmit(e, account, k)}
+                  key={k}
+                >
+                  <div className="td">{account}</div>
+                  <div className="td">
                     {/* TODO: Puedo esconder de una mejor forma esto? */}
                     <input
                       type="text"
@@ -139,35 +144,38 @@ class Attendance extends Component {
                         type="radio"
                         name={`${k}-isPresent`}
                         value="true"
-                        // TODO: Fix
-                        checked={user.isPresente}
+                        checked={!!user.isPresente || null}
                         disabled={!isEditable}
-                        onChange={e => this.handleSubmit(e, account)}
+                        required
                       />
                     </label>
-                  </td>
-                  <td>
+                  </div>
+                  <div className="td">
                     <label className="container" htmlFor={`${k}-isPresent`}>
                       <input
                         type="radio"
                         name={`${k}-isPresent`}
                         value="false"
-                        // TODO: Fix
-                        checked={user.isPresente == false || null}
+                        checked={!!user.isPresente || null}
                         disabled={!isEditable}
-                        onChange={e => this.handleSubmit(e, account)}
+                        required
                       />
                     </label>
-                  </td>
-                  <td>
-                    <input type="text" disabled={!isEditable} />
-                    {/* <input type="button" value=">" onClick={() => }/> */}
-                  </td>
-                </tr>
+                  </div>
+                  <div className="td">
+                    <input
+                      type="text"
+                      name="comentarios"
+                      disabled={!isEditable}
+                    />
+                    <input type="submit" value=">" />
+                  </div>
+                </form>
               )
             })}
-          </tbody>
-        </table>
+          </div>
+        </div>
+        <button type="submit">Enviar test</button>
       </>
     )
   }

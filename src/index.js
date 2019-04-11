@@ -4,7 +4,14 @@ import { Router, Route } from "react-router-dom"
 import { createBrowserHistory } from "history"
 
 import Auth from "./utils/auth"
-import { Home, Accounts, Account, Attendance, Callback } from "./pages"
+import {
+  Home,
+  Accounts,
+  Account,
+  Attendance,
+  AttendanceList,
+  Callback
+} from "./pages"
 import { Layout } from "./components"
 import * as serviceWorker from "./serviceWorker"
 
@@ -23,6 +30,7 @@ ReactDOM.render(
       <Route path="/accounts" exact component={Accounts} />
       <Route path="/accounts/:id" exact component={Account} />
       <Route path="/attendance" exact component={Attendance} />
+      <Route path="/attendance/list" exact component={AttendanceList} />
       <Route
         path="/callback"
         render={props => {

@@ -1,4 +1,5 @@
 import { create } from "axios"
+import { format } from "date-fns"
 import ApolloClient from "apollo-boost"
 import gql from "graphql-tag"
 
@@ -55,7 +56,27 @@ export const uploadAssistance = doc =>
     doc
   })
 
-export const getAssistance = query =>
+export const getAssistance = () =>
   cloudant.post("exec-query-find?blocking=true&result=true", {
-    query
+    query: {
+      selector: {
+        date: format(new Date(), "MM/DD/YYYY")
+      }
+    }
+  })
+
+export const getAllAssitance = () =>
+  cloudant.post("exec-query-find?blocking=true&result=true", {
+    query: {
+      selector: {
+        _id: {
+          $gt: "0"
+        }
+      },
+      sort: [
+        {
+          _id: "asc"
+        }
+      ]
+    }
   })
