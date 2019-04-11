@@ -10,9 +10,11 @@ const cloudant = create({
     "https://72b656e0.us-south.apiconnect.appdomain.cloud/ada-7gen-management",
   data: {
     dbname: "ada_7gen_fe",
-    host: process.env.REACT_APP_CLOUDANT_HOST,
-    username: process.env.REACT_APP_CLOUDANT_USERNAME,
-    password: process.env.REACT_APP_CLOUDANT_PASSWORD
+    host: process.env.REACT_APP_CLOUDANT_HOST || process.env.CLOUDANT_HOST,
+    username:
+      process.env.REACT_APP_CLOUDANT_USERNAME || process.env.CLOUDANT_USERNAME,
+    password:
+      process.env.REACT_APP_CLOUDANT_PASSWORD || process.env.CLOUDANT_PASSWORD
   },
   headers: {
     "X-Debug-Mode": true
@@ -22,7 +24,8 @@ const cloudant = create({
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
   headers: {
-    authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`
+    authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN ||
+      process.env.GITHUB_TOKEN}`
   },
   onError: function onError(params) {
     console.error("Error connecting", params)
