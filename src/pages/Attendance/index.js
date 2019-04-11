@@ -168,7 +168,7 @@ class Attendance extends Component {
                       name="comentarios"
                       disabled={!isEditable}
                     />
-                    <input type="submit" value=">" />
+                    <input type="submit" value=">" disabled={!isEditable} />
                   </div>
                 </form>
               )
