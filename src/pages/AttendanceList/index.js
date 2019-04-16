@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react"
 import { GITHUB_ACCOUNTS } from "../../utils/constants"
 import { getAllAssitance } from "../../utils/api"
 
+import './index.css'
+
 const ListOfAttendance = () => {
   const [alumns, setAlumns] = useState({})
   useEffect(() => {
-    console.log("start me up!")
     async function fetchData() {
       const { data } = await getAllAssitance()
 
       if (Object.keys(alumns).length <= 0 && data.response.docs.length > 0) {
         const depuratedAlumns = data.response.docs.reduce(
-          (acc, curr, i, arr) => {
+          (acc, curr) => {
             var key = curr["date"]
             if (!acc[key]) {
               acc[key] = []
@@ -26,7 +27,6 @@ const ListOfAttendance = () => {
     }
     fetchData()
     return () => {
-      console.log("cleaned up")
     }
   })
 
@@ -49,7 +49,7 @@ const ListOfAttendance = () => {
             <td>{account}</td>
             {Object.keys(alumns).map((date, i) => {
               const line = alumns[date].find(el => el.user === account)
-              return <td key={i}>{line ? line.isPresente + "" : ""}</td>
+              return <td key={i}>{line ? (line.isPresente && "✅" || "🍺") : ""}</td>
             })}
           </tr>
         ))}

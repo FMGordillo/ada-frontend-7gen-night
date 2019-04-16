@@ -88,10 +88,9 @@ class Attendance extends Component {
     return (
       <>
         <h2>Lista de asistentes</h2>
-        <p>Dia de hoy: {currentDay || "N/A"}</p>
         {(loading && <p>Cargando...</p>) ||
-          ((isEditable && <p>se puede editar.</p>) || (
-            <p>No se puede editar, perdon</p>
+          ((isEditable && <p>Hoy es día de clases, ¡pod&eacute;s editar! ✔</p>) || (
+            <p>No se puede editar, perd&oacute;n 🤷‍♀️</p>
           ))}
         {/* TODO: Terminar con "Comentarios" */}
         <div className="table">
@@ -139,28 +138,24 @@ class Attendance extends Component {
                       hidden
                       value={(user && user._rev) || ""}
                     />
-                    <label className="container" htmlFor={`${k}-isPresent`}>
                       <input
                         type="radio"
                         name={`${k}-isPresent`}
                         value="true"
-                        checked={!!user.isPresente || null}
+                        defaultChecked={user.isPresente == true || null}
                         disabled={!isEditable}
                         required
                       />
-                    </label>
                   </div>
                   <div className="td">
-                    <label className="container" htmlFor={`${k}-isPresent`}>
                       <input
                         type="radio"
                         name={`${k}-isPresent`}
                         value="false"
-                        checked={!!user.isPresente || null}
+                        defaultChecked={user.isPresente == false || null}
                         disabled={!isEditable}
                         required
                       />
-                    </label>
                   </div>
                   <div className="td">
                     <input

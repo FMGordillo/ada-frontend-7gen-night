@@ -25,11 +25,12 @@ class Layout extends Component {
   }
   render() {
     return (
-      <div>
+      <>
         <nav>
           <NavLink to="/">Home</NavLink> |{" "}
           <NavLink to="/accounts">Cuentas</NavLink> |{" "}
           <NavLink to="/attendance">Tomar lista</NavLink> |{" "}
+          <NavLink to="/attendance/list">Lista completa</NavLink> |{" "}
           {(this.state.isAuthenticated && (
             <button disabled={this.state.loading} onClick={() => this.login()}>
               Logout
@@ -41,7 +42,7 @@ class Layout extends Component {
           )}
         </nav>
         <div>{this.props.children}</div>
-      </div>
+      </>
     )
   }
 }

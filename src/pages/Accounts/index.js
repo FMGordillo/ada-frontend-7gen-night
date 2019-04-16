@@ -29,7 +29,7 @@ class Accounts extends Component {
   render() {
     const { accounts, loading } = this.state
     return (
-      <div>
+      <>
         <p>Current students: {GITHUB_ACCOUNTS.length}</p>
         <p>Last update: {new Date().toString()}</p>
         {(loading && <p>Please wait...</p>) || (
@@ -49,7 +49,7 @@ class Accounts extends Component {
             ))}
           </ul>
         )}
-      </div>
+      </>
     )
   }
 }
