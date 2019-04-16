@@ -2,19 +2,13 @@
   "version": 2,
   "name": "ada-7gen-fe-dashboard",
   "alias": "ada-dashboard.facundogordillo.com",
-  "build": 
+  "builds": [
     {
       "src": "package.json",
       "use": "@now/static-build",
-      "config": { "distDir": "build" },
-      "env": {
-        "REACT_APP_GITHUB_TOKEN": "@github_token",
-        "REACT_APP_CLOUDANT_HOST": "@cloudant_host",
-        "REACT_APP_CLOUDANT_USERNAME": "@cloudant_username",
-        "REACT_APP_CLOUDANT_PASSWORD": "@cloudant_password"
-      }
-    }
-  ,
+      "config": { "distDir": "build" }
+      
+    }],
   "routes": [
     {
       "src": "/static/(.*)",
@@ -35,5 +29,11 @@
       "headers": { "cache-control": "s-maxage=0" },
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "REACT_APP_GITHUB_TOKEN": "@github_token",
+    "REACT_APP_CLOUDANT_HOST": "@cloudant_host",
+    "REACT_APP_CLOUDANT_USERNAME": "@cloudant_username",
+    "REACT_APP_CLOUDANT_PASSWORD": "@cloudant_password"
+  }
 }
