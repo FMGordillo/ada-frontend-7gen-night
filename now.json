@@ -2,7 +2,7 @@
   "version": 2,
   "name": "ada-7gen-fe-dashboard",
   "alias": "ada-dashboard.facundogordillo.com",
-  "builds": [
+  "build": 
     {
       "src": "package.json",
       "use": "@now/static-build",
@@ -14,7 +14,7 @@
         "REACT_APP_CLOUDANT_PASSWORD": "@cloudant_password"
       }
     }
-  ],
+  ,
   "routes": [
     {
       "src": "/static/(.*)",
