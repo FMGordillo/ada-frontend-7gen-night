@@ -1,5 +1,15 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 3em 0 3em;
+}
+
 table {
-    width: 100%;
-    /* TODO: Terminar esto */
-    overflow-x: scroll;
+  width: 100%;
+  /* TODO: Terminar esto */
+  overflow-x: scroll;
+}
+
+td {
+  text-align: center;
 }
