@@ -88,7 +88,14 @@ class Attendance extends Component {
     return (
       <>
         <h2>Lista de asistentes</h2>
-        {(loading && <p>Cargando...</p>) ||
+        {(loading && <div className="loading-container">  <div className="loading">
+          <div className="box box-1 current"></div>
+          <div className="box box-2"></div>
+          <div className="box box-3"></div>
+          <div className="box box-4"></div>
+          <div className="box box-5"></div>
+        </div>
+        </div>) ||
           ((isEditable && <p>Hoy es día de clases, ¡pod&eacute;s editar! ✔</p>) || (
             <p>No se puede editar, perd&oacute;n 🤷‍♀️</p>
           ))}
@@ -107,10 +114,10 @@ class Attendance extends Component {
               const user =
                 accounts.length > 0
                   ? JSON.parse(
-                      JSON.stringify(
-                        accounts.find(ac => account === ac.user) || {}
-                      )
+                    JSON.stringify(
+                      accounts.find(ac => account === ac.user) || {}
                     )
+                  )
                   : {}
               return (
                 <form
@@ -138,24 +145,24 @@ class Attendance extends Component {
                       hidden
                       value={(user && user._rev) || ""}
                     />
-                      <input
-                        type="radio"
-                        name={`${k}-isPresent`}
-                        value="true"
-                        defaultChecked={user.isPresente == true || null}
-                        disabled={!isEditable}
-                        required
-                      />
+                    <input
+                      type="radio"
+                      name={`${k}-isPresent`}
+                      value="true"
+                      defaultChecked={user.isPresente == true || null}
+                      disabled={!isEditable}
+                      required
+                    />
                   </div>
                   <div className="td">
-                      <input
-                        type="radio"
-                        name={`${k}-isPresent`}
-                        value="false"
-                        defaultChecked={user.isPresente == false || null}
-                        disabled={!isEditable}
-                        required
-                      />
+                    <input
+                      type="radio"
+                      name={`${k}-isPresent`}
+                      value="false"
+                      defaultChecked={user.isPresente == false || null}
+                      disabled={!isEditable}
+                      required
+                    />
                   </div>
                   <div className="td">
                     <input

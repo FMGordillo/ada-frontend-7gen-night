@@ -19,3 +19,59 @@
 .th {
   display: table-cell;
 }
+
+.loading {
+  margin: 2em;
+  display: flex;
+  width: 12em;
+  height: 2em;
+  background-color: red;
+}
+
+.loading .box {
+  flex: 1;
+  background-color: white;
+  border: 2px solid yellow;
+}
+
+.box-1 {
+  order: 0;
+}
+
+.box-2 {
+  order: 1;
+}
+
+.box-3 {
+  order: 2;
+}
+
+.box-4 {
+  order: 3;
+}
+
+.box-5 {
+  order: 4;
+}
+.box.current {
+  background-color: red;
+  animation: loading-boxes .75s infinite ease-out;
+}
+
+@keyframes loading-boxes {
+  0% {
+    order: 1;
+  }
+  25% {
+    order: 2;
+  }
+  50% {
+    order: 3;
+  }
+  75% {
+    order: 4;
+  }
+  100% {
+    order: 5;
+  }
+}
