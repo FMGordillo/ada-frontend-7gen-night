@@ -1,0 +1,13 @@
+version: '3'
+
+volumes:
+  ada-frontend-node_modules:
+
+services:
+  ada-frontend:
+    build: "."
+    volumes:
+      - .:/usr/src/app
+      - ada-frontend-node_modules:/usr/src/app/node_modules
+    ports:
+      - "3000:3000"
